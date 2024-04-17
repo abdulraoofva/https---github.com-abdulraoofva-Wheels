@@ -38,7 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'social_django',
     'app',
+    'drowsiness_detection',
 ]
 
 MIDDLEWARE = [
@@ -49,6 +51,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'wheelways.urls'
@@ -64,6 +67,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
             ],
         },
     },
@@ -101,6 +105,11 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    # Other authentication backends if needed
+]
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
@@ -129,7 +138,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL="app.Usertable"
 
 
-LOGIN_URL = 'user_login'
+# LOGIN_URL = 'user_login'
 
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -138,3 +147,46 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'wheelways2@gmail.com'
 EMAIL_HOST_PASSWORD = 'scnh nkog aegr pefq '
+
+# session settings
+SESSION_ENGINE = "django.contrib.sessions.backends.db"
+SESSION_COOKIE_NAME = "sessionid"
+SESSION_COOKIE_AGE = 600
+LOGIN_URL = 'user_login'
+
+
+#social
+AUTHENTICATION_BACKENDS = [
+    'social_core.backends.google.GoogleOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+
+]
+
+LOGIN_URL = 'user_login'
+LOGIN_REDIRECT_URL = 'index2'
+LOGOUT_URL = 'logout'
+LOGOUT_REDIRECT_URL = 'user_login'
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '797071352641-boaaq2odrk38v3rfs93gnu7t6u007st9.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
+
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+
+RAZOR_KEY_ID = 'rzp_test_eVXW2kMEhg5z8Z'
+RAZOR_KEY_SECRET = '2Erk77NejDvSmwY4ib3TULOZ'
+
+
+
+
+
+# Add these lines to your settings.py file
+
+# Configuration settings for drowsiness detection
+SHAPE_PREDICTOR_PATH = "C:\\Users\\raoof\\OneDrive\\Desktop\\Main\\wheelways\\drowsiness\\shape_predictor_68_face_landmarks.dat"
+ALARM_PATH = "C:\\Users\\raoof\\OneDrive\\Desktop\\Main\\wheelways\\wheelways\\alarm.wav"
+WEBCAM_INDEX = 0  # Change this to the index of your webcam if necessary
+

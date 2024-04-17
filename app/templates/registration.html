@@ -10,7 +10,7 @@
             margin: 0;
             padding: 0;
             font-family: Arial, Helvetica, sans-serif;
-            background-image: url(""); /* Replace with your own image path */
+            background-image: url("{% static '..\static\img\raoof.jpg' %}"); /* Replace with your own image path */
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -74,25 +74,27 @@
         input[type="text"],
         input[type="email"],
         input[type="password"],
-        input[type="date"] {
+        input[type="date"],
+        input[type="tel"] {
             width: 95%;
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 3px;
         }
-		select {
-		    width: 100%;
+        select {
+            width: 100%;
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 3px;
-		
-		}
+        
+        }
 
         input[type="text"]::placeholder,
         input[type="email"]::placeholder,
         input[type="password"]::placeholder,
         select::placeholder,
-        input[type="date"]::placeholder {
+        input[type="date"]::placeholder,
+        input[type="tel"]::placeholder {
             color: #555;
             font-weight: bold;
         }
@@ -109,7 +111,7 @@
         }
 
         .name-group input[type="text"] {
-            width: 60%;
+            width: 48%; /* Adjust the width to control placement */
         }
 
         .error-message {
@@ -132,10 +134,10 @@
         .success-message {
             color: green;
         }
-	    select:focus {
+        select:focus {
             border-color: #007BFF; /* Change border color on focus */
         }
-		.error-message {
+        .error-message {
             color: #e74c3c;
             margin-top: 5px;
             font-size: 12px;
@@ -167,10 +169,9 @@
         </div>
         <div class="website-name">
             <br>
-            Welcome to Sportigo ! 
+            Welcome to WHEELWAYS ! 
         </div>
         <a href="{% url 'index' %}">Home</a>
-        <a href="#">About us</a>
         <!-- Add more links as needed -->
     </div>
 
@@ -183,7 +184,7 @@
             <div class="form-group">
                 <select id="role" name="role" required>
                     <option value="normal_user" selected>Normal User</option>
-                    <option value="club_user">Club User</option>
+                    <option value="driver">DRIVER</option>
                 </select>
             </div>
             
@@ -195,6 +196,11 @@
             <div class="form-group name-group">
                 <input type="text" id="lname" name="lname" placeholder="Last Name" required>
                 <span id="lname-error" class="error-message"></span>
+            </div>
+            
+            <div class="form-group">
+                <input type="tel" id="phone" name="phone" placeholder="Phone Number" required>
+                <span id="phone-error" class="error-message"></span>
             </div>
             
             <div class="form-group">
@@ -240,10 +246,12 @@
     const password = document.getElementById('password');
     const confirmPassword = document.getElementById('confirm-password');
     const dob = document.getElementById('dob');
+    const phone = document.getElementById('phone');
     const emailError = document.getElementById('email-error');
     const passwordError = document.getElementById('password-error');
     const confirmPasswordError = document.getElementById('confirm-password-error');
     const dobError = document.getElementById('dob-error');
+    const phoneError = document.getElementById('phone-error');
     const fname = document.getElementById("fname");
     const lname = document.getElementById("lname");
     const fnameError = document.getElementById("fname-error");
@@ -274,7 +282,7 @@
     }
 
     // Function to validate Email
-     function validateEmail() {
+    function validateEmail() {
         var emailValue = email.value.trim();
         var emailRegex = /^[A-Za-z0-9._-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/;
         emailvalid();
@@ -295,10 +303,10 @@ function emailvalid(){
         if (!bool) {
           return true;
         } else {
-            emailError.textContent = "Email already registered";
+            emailError.textContent = "Enail already registered";
         }
       });
-    }  
+    } 
 
     // Function to validate Password
     function validatePassword() {
@@ -338,15 +346,29 @@ function emailvalid(){
 
     // Function to validate Date of Birth
     function validateDateOfBirth() {
-        var dobValue = dob.value;
-        var currentDate = new Date();
-        var selectedDate = new Date(dobValue);
+    var dobValue = dob.value;
+    var currentDate = new Date();
+    var selectedDate = new Date(dobValue);
+    var minDate = new Date('2013-01-01');
+    var maxDate = new Date('1950-01-01') // Minimum allowed DOB
 
-        // Check if the selectedDate is a valid date and not in the future
-        if (isNaN(selectedDate) || selectedDate > currentDate) {
-            dobError.textContent = "Please enter a valid Date of Birth.";
+    // Check if the selectedDate is a valid date and not in the future
+    if (isNaN(selectedDate) || selectedDate > currentDate || selectedDate > minDate || selectedDate < maxDate) {
+        dobError.textContent = "Please enter a valid Date of Birth.";
+    } else {
+        dobError.textContent = "";
+    }
+}
+
+    // Function to validate Phone Number
+    function validatePhoneNumber() {
+        var phoneValue = phone.value.trim();
+        var phoneRegex = /^[0-9]+$/;
+
+        if (!phoneValue.match(phoneRegex)) {
+            phoneError.textContent = "Please enter a valid phone number (digits only).";
         } else {
-            dobError.textContent = "";
+            phoneError.textContent = "";
         }
     }
 
@@ -359,6 +381,7 @@ function emailvalid(){
         const isPasswordValid = !passwordError.textContent;
         const isConfirmPasswordValid = !confirmPasswordError.textContent;
         const isDateOfBirthValid = !dobError.textContent;
+        const isPhoneNumberValid = !phoneError.textContent;
 
         // Enable the submit button if all fields are valid, otherwise disable it
         if (
@@ -367,7 +390,8 @@ function emailvalid(){
             isEmailValid &&
             isPasswordValid &&
             isConfirmPasswordValid &&
-            isDateOfBirthValid
+            isDateOfBirthValid &&
+            isPhoneNumberValid
         ) {
             submitButton.removeAttribute('disabled');
         } else {
@@ -406,12 +430,13 @@ function emailvalid(){
         toggleSubmitButton();
     });
 
+    phone.addEventListener("input", function () {
+        validatePhoneNumber();
+        toggleSubmitButton();
+    });
+
     // Initially, disable the submit button
     toggleSubmitButton();
 </script>
 
-    
-
-</head>
 </html>
-

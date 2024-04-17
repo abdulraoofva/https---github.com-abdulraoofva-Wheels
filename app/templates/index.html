@@ -36,9 +36,9 @@
         <div class="row">
             <div class="col-md-6 text-center text-lg-left mb-2 mb-lg-0">
                 <div class="d-inline-flex align-items-center">
-                    <a class="text-body pr-3" href=""><i class="fa fa-phone-alt mr-2"></i>+012 345 6789</a>
+                    <a class="text-body pr-3" href=""><i class="fa fa-phone-alt mr-2"></i>8921940244</a>
                     <span class="text-body">|</span>
-                    <a class="text-body px-3" href=""><i class="fa fa-envelope mr-2"></i>info@example.com</a>
+                    <a class="text-body px-3" href=""><i class="fa fa-envelope mr-2"></i>wheelways2@gmail.com</a>
                 </div>
             </div>
             <div class="col-md-6 text-center text-lg-right">
@@ -77,16 +77,16 @@
                 </button>
                 <div class="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse">
                     <div class="navbar-nav ml-auto py-0">
-                        <a href="index.html" class="nav-item nav-link active">Home</a>
+                        <a href="{% url 'index' %}" class="nav-item nav-link active">Home</a>
                         <a href="{% url 'user_login' %}" class="nav-item nav-link active">Login</a>
-                        <a href="about.html" class="nav-item nav-link">About</a>
+                        <a href="{% url 'about' %}" class="nav-item nav-link">About</a>
                         <a href="service.html" class="nav-item nav-link">Service</a>
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Cars</a>
                             <div class="dropdown-menu rounded-0 m-0">
                                 <a href="car.html" class="dropdown-item">Car Listing</a>
                                 <a href="detail.html" class="dropdown-item">Car Detail</a>
-                                <a href="booking.html" class="dropdown-item">Car Booking</a>
+                                <a href="/booking" class="dropdown-item">Car Booking</a>
                             </div>
                         </div>
                         <div class="nav-item dropdown">
@@ -162,7 +162,7 @@
                         <div class="p-3" style="max-width: 900px;">
                             <h4 class="text-white text-uppercase mb-md-3">Where Every Mile is a Smile</h4>
                             <h1 class="display-1 text-white mb-md-4">Elevate Your Journey with Wheelways</h1>
-                            <a href="" class="btn btn-primary py-md-3 px-md-5 mt-2">Reserve Now</a>
+                            <a href="{% url 'user_login' %}" class="btn btn-primary py-md-3 px-md-5 mt-2">Reserve Now</a>
                         </div>
                     </div>
                 </div>
@@ -196,11 +196,11 @@
     <div class="container-fluid py-5">
         <div class="container pt-5 pb-3">
             <h1 class="display-1 text-primary text-center">01</h1>
-            <h1 class="display-4 text-uppercase text-center mb-5">Welcome To <span class="text-primary">Royal Cars</span></h1>
+            <h1 class="display-4 text-uppercase text-center mb-5">Welcome To <span class="text-primary">WheelWAys</span></h1>
             <div class="row justify-content-center">
                 <div class="col-lg-10 text-center">
                     <img class="w-75 mb-4" src="{% static "img/about.png" %}" alt="">
-                    <p>Justo et eos et ut takimata sed sadipscing dolore lorem, et elitr labore labore voluptua no rebum sed, stet voluptua amet sed elitr ea dolor dolores no clita. Dolores diam magna clita ea eos amet, amet rebum voluptua vero vero sed clita accusam takimata. Nonumy labore ipsum sea voluptua sea eos sit justo, no ipsum sanctus sanctus no et no ipsum amet, tempor labore est labore no. Eos diam eirmod lorem ut eirmod, ipsum diam sadipscing stet dolores elitr elitr eirmod dolore. Magna elitr accusam takimata labore, et at erat eirmod consetetur tempor eirmod invidunt est, ipsum nonumy at et.</p>
+                    <p>At WheelWays, we've reimagined the way you rent cars. Our comprehensive Car Rental Management System empowers you to browse, select, and reserve the perfect vehicle for your needs. Whether it's a family road trip, a business meeting, or a weekend adventure, we've got the wheels you need.</p>
                 </div>
             </div>
             <div class="row mt-3">
@@ -542,16 +542,16 @@
                         <div class="text-right">
                             <h3 class="text-uppercase text-light mb-3">Want to be driver?</h3>
                             <p class="mb-4">Lorem justo sit sit ipsum eos lorem kasd, kasd labore</p>
-                            <a class="btn btn-primary py-2 px-4" href="">Start Now</a>
+                            <a class="btn btn-primary py-2 px-4" href="driverreg">Start Now</a>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-6 px-0">
                     <div class="px-5 bg-dark d-flex align-items-center justify-content-between" style="height: 350px;">
                         <div class="text-left">
-                            <h3 class="text-uppercase text-light mb-3">Looking for a car?</h3>
+                            <h3 class="text-uppercase text-light mb-3">Want to Partner With Us?</h3>
                             <p class="mb-4">Lorem justo sit sit ipsum eos lorem kasd, kasd labore</p>
-                            <a class="btn btn-primary py-2 px-4" href="">Start Now</a>
+                            <a class="btn btn-primary py-2 px-4" href="owners">Start Now</a>
                         </div>
                         <img class="img-fluid flex-shrink-0 mr-n5 w-50 ml-4" src="{% static "img/banner-right.png" %}" alt="">
                     </div>
@@ -717,8 +717,8 @@
             <div class="col-lg-3 col-md-6 mb-5">
                 <h4 class="text-uppercase text-light mb-4">Get In Touch</h4>
                 <p class="mb-2"><i class="fa fa-map-marker-alt text-white mr-3"></i>123 Street, New York, USA</p>
-                <p class="mb-2"><i class="fa fa-phone-alt text-white mr-3"></i>+012 345 67890</p>
-                <p><i class="fa fa-envelope text-white mr-3"></i>info@example.com</p>
+                <p class="mb-2"><i class="fa fa-phone-alt text-white mr-3"></i>8921940244</p>
+                <p><i class="fa fa-envelope text-white mr-3"></i>wheelways2@gmail.com</p>
                 <h6 class="text-uppercase text-white py-2">Follow Us</h6>
                 <div class="d-flex justify-content-start">
                     <a class="btn btn-lg btn-dark btn-lg-square mr-2" href="#"><i class="fab fa-twitter"></i></a>

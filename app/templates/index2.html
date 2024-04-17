@@ -28,6 +28,108 @@
 
     <!-- Template Stylesheet -->
     <link href="{% static "css/style.css" %}" rel="stylesheet">
+
+    <!-- Custom CSS for Animations -->
+    <style>
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .welcome-message {
+            animation: fadeInUp 1s ease-in-out;
+            color: white; /* Text color */
+            background: linear-gradient(135deg, #ff6a00, #ee0979); /* Gradient background */
+            padding: 20px; /* Add padding for better visibility */
+            border-radius: 10px; /* Add border-radius for rounded corners */
+        }
+        
+        /* Styles for Google Translate dropdown */
+        /* Styles for Google Translate dropdown */
+        #google_translate_element .skiptranslate {
+            display: inline !important;
+        }
+
+        #google_translate_element .skiptranslate {
+            display: inline !important;
+        }
+
+        .goog-te-gadget {
+            color: transparent !important;
+        }
+
+        /* Dark Theme for the select dropdown */
+        .goog-te-combo {
+            padding: 8px;
+            /* Add padding for spacing */
+            font-size: 14px;
+            /* Set font size */
+            border: 1px solid #666;
+            /* Dark border */
+            border-radius: 4px;
+            /* Add rounded corners */
+            background-color: #000000;
+            /* Dark background color */
+            color: #fff;
+            /* Light text color */
+        }
+
+        /* Style the select dropdown when it's hovered */
+        .goog-te-combo:hover {
+            border-color: #2da721;
+            /* Darker border color on hover */
+        }
+
+        /* Style the select dropdown when it's focused (clicked) */
+        .goog-te-combo:focus {
+            outline: none;
+            /* Remove the default focus outline */
+            border-color: #007bff;
+            /* Change border color on focus */
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+            /* Add a shadow on focus */
+        }
+
+        /* Style the dropdown arrow */
+        .goog-te-combo-arrow {
+            font-size: 12px;
+            /* Adjust arrow size */
+            color: #fff;
+            /* Light arrow color */
+        }
+
+        /* Style the dropdown options */
+        .goog-te-menu-value {
+            font-size: 14px;
+            /* Set font size for options */
+            color: #fff;
+            /* Light text color for options */
+            background-color: #68dd3a;
+            /* Dark background color for options */
+        }
+
+        /* Style the dropdown options on hover */
+        .goog-te-menu-value:hover {
+            background-color: #007bff;
+            /* Change background color on hover */
+            color: #fff;
+            /* Light text color on hover */
+        }
+        .VIpgJd-ZVi9od-ORHb-OEVmcd{
+            display: none;
+        }
+        /* Hide the unwanted elements */
+        .VIpgJd-ZVi9od-l4eHX-hSRGPd {
+            display: none !important;
+        }
+    </style>
+   
 </head>
 
 <body>
@@ -36,9 +138,9 @@
         <div class="row">
             <div class="col-md-6 text-center text-lg-left mb-2 mb-lg-0">
                 <div class="d-inline-flex align-items-center">
-                    <a class="text-body pr-3" href=""><i class="fa fa-phone-alt mr-2"></i>+012 345 6789</a>
+                    <a class="text-body pr-3" href=""><i class="fa fa-phone-alt mr-2"></i>8921940244</a>
                     <span class="text-body">|</span>
-                    <a class="text-body px-3" href=""><i class="fa fa-envelope mr-2"></i>info@example.com</a>
+                    <a class="text-body px-3" href=""><i class="fa fa-envelope mr-2"></i>wheelways2@gmail.com</a>
                 </div>
             </div>
             <div class="col-md-6 text-center text-lg-right">
@@ -77,18 +179,15 @@
                 </button>
                 <div class="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse">
                     <div class="navbar-nav ml-auto py-0">
-                        <a href="index.html" class="nav-item nav-link active">Home</a>
-                        <a href="{% url "user_login" %}" class="nav-item nav-link active">Login</a>
-                        <a href="about.html" class="nav-item nav-link">About</a>
-                        <a href="service.html" class="nav-item nav-link">Service</a>
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Cars</a>
-                            <div class="dropdown-menu rounded-0 m-0">
-                                <a href="car.html" class="dropdown-item">Car Listing</a>
-                                <a href="detail.html" class="dropdown-item">Car Detail</a>
-                                <a href="booking.html" class="dropdown-item">Car Booking</a>
-                            </div>
-                        </div>
+                        <a href="" class="nav-item nav-link active">Home</a>
+                        <a href="{% url "user_profile" %}" class="nav-item nav-link active">My profile</a>
+                        <a href="{% url 'shop' user_email=user_email %}" class="nav-item nav-link active">Shop Accessories</a>
+
+                        <a href="{% url 'cart' %}" class="nav-item nav-link">Cart</a>
+                        <a href="{% url 'wishlist' %}" class="nav-item nav-link">Wishlist</a>
+                        <a href="{% url 'detect_drowsiness' %}" class="nav-item nav-link">Detect Drowsiness</a>
+                        <a href="{% url 'change_password' %}" class="nav-item nav-link">Change password</a>
+                        
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
                             <div class="dropdown-menu rounded-0 m-0">
@@ -104,6 +203,54 @@
     </div>
     <!-- Navbar End -->
 
+    <!-- Language Selector -->
+    <div class="container py-3">
+        <div id="google_translate_element"></div>
+    </div>
 
-        </body>
-        </html>
+    <!-- Google Translate Script -->
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({ pageLanguage: 'en' }, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+    <div class="container-fluid py-5">
+        <div class="container pt-5 pb-3">
+            <!-- Display welcome message for the current user with CSS animation -->
+            <h1 class="display-4 text-uppercase text-center mb-5 welcome-message">Welcome, {{ request.user.first_name }}</h1>
+            
+            <h2 class="display-4 text-uppercase text-center mb-5">Explore Cars</h2>
+            <div class="row">
+                {% for car in all_cars %}
+                    <div class="col-lg-4 col-md-6 mb-2">
+                        <div class="rent-item mb-4">
+                            {% if car.images %}
+                                <img class="img-fluid mb-4" src="{{ car.images.first.image.url }}" alt="{{ car.make }} {{ car.model }}">
+                            {% else %}
+                                <p>No image available</p>
+                            {% endif %}
+                            <h4 class="text-uppercase mb-4">{{ car.make }} {{ car.model }}</h4>
+                            <div class="d-flex justify-content-center mb-4">
+                                <div class="px-2">
+                                    <i class="fa fa-car text-primary mr-1"></i>
+                                    <span>{{ car.year }}</span>
+                                </div>
+                                <div class="px-2">
+                                    <i class="fa fa-money text-primary mr-1"></i>
+                                    <!-- Change the dollar sign to Rs -->
+                                    <span>Rs{{ car.price }}</span>
+                                </div>
+                                <!-- Add other car details as needed -->
+                            </div>
+                            <a class="btn btn-primary px-3" href="{% url 'car_details' car.id  user.email%}">View Details</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    </body>
+</html>

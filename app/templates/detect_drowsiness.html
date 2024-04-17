@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drowsiness Detection</title>
+    <!-- Include any necessary CSS stylesheets here -->
+    <style>
+        /* Add your CSS styles here */
+        #video-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        #video {
+            border: 1px solid #ccc;
+        }
+        
+        #alert-container {
+            margin-top: 20px;
+            text-align: center;
+            font-weight: bold;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Drowsiness Detection</h1>
+    
+    <div id="video-container">
+        <video id="video" width="640" height="480" autoplay></video>
+    </div>
+    
+    <div id="alert-container">
+        <!-- Placeholder for the alert message -->
+    </div>
+
+    <!-- Form for stopping camera recording -->
+    <form id="stop-recording-form" method="post">
+        {% csrf_token %}
+        <button type="submit">Stop Recording</button>
+    </form>
+    
+    <script>
+        // JavaScript code to handle webcam video stream
+        var video = document.getElementById('video');
+        var stopRecordingForm = document.getElementById('stop-recording-form');
+
+        navigator.mediaDevices.getUserMedia({ video: true })
+        .then(function(stream) {
+            video.srcObject = stream;
+            video.play();
+        })
+        .catch(function(err) {
+            console.error('Error accessing webcam:', err);
+        });
+
+        // Handle form submission to stop recording
+        stopRecordingForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            // Add logic here to stop the camera recording (e.g., close the video stream)
+            // You may need to use AJAX or fetch API to communicate with the server
+        });
+    </script>
+</body>
+</html>
